@@ -12,11 +12,11 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Alcohol',
+            name='Image',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('Alcohol_name', models.CharField(max_length=100, verbose_name='술이름')),
-                ('volume', models.IntegerField()),
+                ('name', models.CharField(max_length=30, null=True)),
+                ('main_image', models.ImageField(blank=True, upload_to='', verbose_name='메인 이미지')),
             ],
         ),
     ]

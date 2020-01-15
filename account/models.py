@@ -4,5 +4,5 @@ from django.db import models
 
 class User(AbstractUser):
     name = models.CharField(max_length=30)
-    img_profile = models.ImageField('프로필 이미지', blank=True, upload_to='user/profile')
+    img_profile = models.ImageField('프로필 이미지', blank=True, upload_to='profile')
 
