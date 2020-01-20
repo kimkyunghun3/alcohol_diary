@@ -1,6 +1,6 @@
 from django.db import models
-from image.models import Image
-from alcohol.models import Alcohol
+from images.models import Image
+from alcohols.models import Alcohol
 from utils.django.models import TimeStampedModel
 
 
@@ -17,15 +17,15 @@ class DailyRecord(TimeStampedModel):
     )
 
     creator = models.ForeignKey(
-        "account.User",
+        "accounts.User",
         on_delete=models.CASCADE,
         null=True,
-        related_name='daily_record'
+        related_name='daily_records'
     )
 
-    comment = models.CharField(max_length=300,null =True)
+    comment = models.CharField(max_length=300, null=True)
     alcohol = models.ForeignKey(Alcohol, on_delete=models.CASCADE, null=True)
-    image = models.ForeignKey(Image, on_delete=models.CASCADE, null=True, related_name='daily_record')
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, null=True, related_name='daily_records')
     date = models.TimeField(null=True)
     drunken = models.CharField(max_length=50, choices=drunken_type, default="not_drunken")
     hangover = models.CharField(max_length=50, choices=hangover_type, default="great")

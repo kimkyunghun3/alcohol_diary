@@ -1,6 +1,7 @@
 from django.contrib import admin
 from . import models
 
+
 @admin.register(models.DailyRecord)
 class DailyRecordAdmin(admin.ModelAdmin):
     list_display = (
@@ -11,6 +12,5 @@ class DailyRecordAdmin(admin.ModelAdmin):
         'image',
         'drunken',
         'hangover',
-
 
     )

@@ -35,10 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account',
-    'alcohol',
-    'daily_record',
-    'image',
+    'accounts',
+    'alcohols',
+    'daily_records',
+    'images',
 
 ]
 
@@ -118,7 +118,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = "account.User"
+AUTH_USER_MODEL = "accounts.User"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
