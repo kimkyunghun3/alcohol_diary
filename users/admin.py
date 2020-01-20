@@ -1,9 +1,13 @@
 from django.contrib import admin
 
-from accounts.models import User
+from users.models import User
 from config import settings
 
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        'name',
+        'img_profile',
+
+    )

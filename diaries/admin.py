@@ -2,15 +2,14 @@ from django.contrib import admin
 from . import models
 
 
-@admin.register(models.DailyRecord)
+@admin.register(models.Diary)
 class DailyRecordAdmin(admin.ModelAdmin):
     list_display = (
         'creator',
         'date',
-        'comment',
-        'alcohol',
-        'image',
-        'drunken',
-        'hangover',
+        'review',
+        'drunken_level',
+        'hangover_level',
+        'action_type',
 
     )
