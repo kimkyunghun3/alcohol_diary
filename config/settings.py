@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'alcohols',
     'diaries',
     'images',
+    'rest_framework',
 
 ]
 

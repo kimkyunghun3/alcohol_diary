@@ -5,7 +5,7 @@ from utils.django.models import TimeStampedModel
 
 
 class AlcoholType(TimeStampedModel):
-    Alcohol_name = models.CharField('술종류', max_length=100)
+    alcohol_name = models.CharField('술종류', max_length=100)
 
     def __str__(self):
         return f'{self.Alcohol_name}'
