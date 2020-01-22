@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'diaries',
     'images',
     'rest_framework',
+    'drf_multiple_model',
 
 ]
 

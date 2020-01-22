@@ -11,3 +11,4 @@ class DiariesListAPI(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return Diary.objects.all()
+

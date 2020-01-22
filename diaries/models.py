@@ -34,3 +34,4 @@ class Diary(TimeStampedModel):
 
     def __str__(self):
         return f'Time Record - {self.creator}'
+
