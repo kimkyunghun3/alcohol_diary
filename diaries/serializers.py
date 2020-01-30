@@ -9,7 +9,7 @@ class DiarySerializers(serializers.ModelSerializer):
     # alcohol_records = AlcoholRecordSerializers(many=True)
     # alcohol_records = PrimaryKeyRelatedField(many=True,read_only=True)
     # print(alcohol_records)
-    ar = AlcoholRecordSerializers(many=True)
+    alcohol_records = AlcoholRecordSerializers(many=True)
 
     class Meta:
         model = Diary
@@ -21,7 +21,7 @@ class DiarySerializers(serializers.ModelSerializer):
             'drunken_level',
             'hangover_level',
             'action_type',
-            'ar',
+            'alcohol_records',
         )
 
 

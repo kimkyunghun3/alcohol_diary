@@ -20,5 +20,5 @@ class AlcoholRecord(TimeStampedModel):
     bottles = models.FloatField()
     glasses = models.FloatField()
     alcohol_records = models.ForeignKey(Alcohol, on_delete=models.CASCADE, null=True, related_name='alcohol_records')
-    diary = models.ForeignKey(Diary, related_name="ar", on_delete=models.CASCADE, null=True)
+    diary = models.ForeignKey(Diary, related_name="alcohol_records", on_delete=models.CASCADE, null=True)
 
