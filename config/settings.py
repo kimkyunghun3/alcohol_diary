@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'images',
     'rest_framework',
     'drf_multiple_model',
-    'djangorestframework-jwt',
+
 
 ]
 
@@ -126,3 +126,20 @@ AUTH_USER_MODEL = "users.User"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MEDIA_URL = "/media/"
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ]
+}
+
+
+JWT_AUTH = {
+    'JWT_SECRET_KEY': settings.SECRET_KEY,
+    'JWT_ALGORITHM': 'HS256',
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000),
+    'JWT_ALLOW_REFRESH': False,
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+}

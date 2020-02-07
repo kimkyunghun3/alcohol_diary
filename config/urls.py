@@ -17,9 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/v1/alcohols/', include('alcohols.urls', namespace='alcohols')),
-    path('api/v1/diaries/', include('diaries.urls', namespace='diaries')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('admin/', admin.site.urls),
+                  path('api/v1/alcohols/', include('alcohols.urls', namespace='alcohols')),
+                  path('api/v1/diaries/', include('diaries.urls', namespace='diaries')),
+                  path('api-jwt-auth/', obtain_jwt_token),
+                  path('api-jwt-auth/refresh/', refresh_jwt_token),
+                  path('api-jwt-auth/verify/', verify_jwt_token),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
