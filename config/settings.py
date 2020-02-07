@@ -19,8 +19,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY ='8886c592089a4ed719130630690f6b81'
-#'ly8a^)gpokm-=kxxk!ti8c4e4ytdg988@#%of^bejxg(wg@4&l'
+SECRET_KEY = '8886c592089a4ed719130630690f6b81'
+# 'ly8a^)gpokm-=kxxk!ti8c4e4ytdg988@#%of^bejxg(wg@4&l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -140,13 +140,14 @@ REST_FRAMEWORK = {
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ]
 }
+import datetime
 
 JWT_AUTH = {
     'JWT_SECRET_KEY': SECRET_KEY,
     'JWT_ALGORITHM': 'HS256',
-
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
     'JWT_ALLOW_REFRESH': True,
-
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
 }
 SITE_ID = 1
 REST_USE_JWT = True

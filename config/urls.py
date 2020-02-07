@@ -28,5 +28,5 @@ urlpatterns = [
                   path('api-jwt-auth/verify/', verify_jwt_token),
                   path('rest-auth/', include('rest_auth.urls')),
                   path('rest-auth/registration', include('rest_auth.registration.urls')),
-                  path('accounts/', include('accounts.urls')),
+                  path('users/', include('users.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
