@@ -151,3 +151,9 @@ JWT_AUTH = {
 }
 SITE_ID = 1
 REST_USE_JWT = True
+
+AUTHENTICATION_BACKENDS = (
+
+    'django.contrib.auth.backends.ModelBackend',
+
+)

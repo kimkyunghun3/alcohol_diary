@@ -1,4 +1,3 @@
-
 from django.conf.urls import include, url
 
 from . import views
@@ -9,4 +8,5 @@ app_name = 'users'
 urlpatterns = [
     url('rest-auth/kakao', KakaoLogin.as_view(), name='kakao_login'),
     url('users/kakao/login/callback', views.social_login),
+    url('', views.UserListAPI.as_view(), name='User'),
 ]

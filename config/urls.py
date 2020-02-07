@@ -23,6 +23,7 @@ urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('api/v1/alcohols/', include('alcohols.urls', namespace='alcohols')),
                   path('api/v1/diaries/', include('diaries.urls', namespace='diaries')),
+                  path('api/v1/users/', include('users.urls', namespace='users_pk')),
                   path('api-jwt-auth/', obtain_jwt_token),
                   path('api-jwt-auth/refresh/', refresh_jwt_token),
                   path('api-jwt-auth/verify/', verify_jwt_token),
