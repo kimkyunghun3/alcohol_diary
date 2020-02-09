@@ -13,7 +13,7 @@ class UserSerializers(serializers.ModelSerializer):
         )
 
 
-class UserSerializers(serializers.ModelSerializer):
+class UserOnlySerializers(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (

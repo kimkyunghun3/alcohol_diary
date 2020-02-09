@@ -17,17 +17,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
+# from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('api/v1/alcohols/', include('alcohols.urls', namespace='alcohols')),
                   path('api/v1/diaries/', include('diaries.urls', namespace='diaries')),
-                  path('api/v1/users/', include('users.urls', namespace='users_pk')),
-                  path('api-jwt-auth/', obtain_jwt_token),
-                  path('api-jwt-auth/refresh/', refresh_jwt_token),
-                  path('api-jwt-auth/verify/', verify_jwt_token),
-                  path('rest-auth/', include('rest_auth.urls')),
-                  path('rest-auth/registration', include('rest_auth.registration.urls')),
+                  path('api/v1/usersIP/', include('users.urls', namespace='users_pk')),
+                  path('api/v1/usersOnly', include('users.urls', namespace='usersOnly')),
+                  # path('api-jwt-auth/', obtain_jwt_token),
+                  # path('api-jwt-auth/refresh/', refresh_jwt_token),
+                  # path('api-jwt-auth/verify/', verify_jwt_token),
+                  # path('rest-auth/', include('rest_auth.urls')),
+                  # path('rest-auth/registration', include('rest_auth.registration.urls')),
                   path('users/', include('users.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
