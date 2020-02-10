@@ -5,6 +5,8 @@ from rest_framework import generics, permissions
 
 from users.serializers import UserSerializers
 from users.models import User
+from django.contrib.auth.models import User
+
 
 #
 # class KakaoLogin(SocialLoginView):
@@ -28,4 +30,12 @@ class UserOnlyAPI(generics.ListCreateAPIView):
     serializer_class = UserSerializers
 
     def get_queryset(self):
-        return User.objects.all()
+        return User.objects.get('name', 'img_profile')
+
+
+def username_present(username):
+    if User.objects.filter(username=username).exists():
+        return UserOnlyAPI
+
+    return False
+
