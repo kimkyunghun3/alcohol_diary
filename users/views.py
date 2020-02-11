@@ -33,9 +33,8 @@ class UserOnlyAPI(generics.ListCreateAPIView):
         return User.objects.get('name', 'img_profile')
 
 
-def username_present(username):
+def UsernamePresent(username):
     if User.objects.filter(username=username).exists():
-        return UserOnlyAPI
+        return UserListAPI
 
     return False
-
