@@ -32,6 +32,7 @@ class Diary(TimeStampedModel):
     hangover_level = models.CharField(max_length=50, choices=hangover_level, default="great")
     action_type = models.CharField(max_length=50, choices=action_type, )
 
+
     def __str__(self):
         return f'Time Record - {self.creator}'
 

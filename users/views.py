@@ -35,6 +35,6 @@ class UserOnlyAPI(generics.ListCreateAPIView):
 
 def UsernamePresent(username):
     if User.objects.filter(username=username).exists():
-        return UserListAPI
+        return UserOnlyAPI
 
     return False

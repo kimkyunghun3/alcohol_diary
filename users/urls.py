@@ -9,5 +9,5 @@ urlpatterns = [
     # url('rest-auth/kakao', KakaoLogin.as_view(), name='kakao_login'),
     # url('users/kakao/login/callback', views.social_login),
     url('', views.UserListAPI.as_view(), name='UserIP'),
-    url('UserOnly/', views.UserOnlyAPI.as_view(), name='UserOnly'),
+    url('<uuid:pk>/', views.UserOnlyAPI.as_view(), name='UserOnly'),
 ]
