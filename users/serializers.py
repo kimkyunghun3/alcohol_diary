@@ -9,15 +9,16 @@ class UserSerializers(serializers.ModelSerializer):
         fields = (
             'username',
             'img_profile',
-
         )
 
 
-# class UserOnlySerializers(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = (
-#             'name',
-#             'img_profile',
-#
-#         )
+class UserCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+
+            'img_profile',
+        )
+
+    def to_representation(self, instance):
+        return UserSerializers(instance).data

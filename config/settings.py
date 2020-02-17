@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'diaries',
     'images',
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_multiple_model',
     'rest_auth',
     'django.contrib.sites',
@@ -137,7 +138,8 @@ REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
 
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }
 # import datetime
