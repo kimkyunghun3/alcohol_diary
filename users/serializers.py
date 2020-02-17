@@ -7,17 +7,17 @@ class UserSerializers(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'name',
-            'img_profile',
             'username',
-        )
-
-
-class UserOnlySerializers(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = (
-            'name',
             'img_profile',
 
         )
+
+
+# class UserOnlySerializers(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = (
+#             'name',
+#             'img_profile',
+#
+#         )

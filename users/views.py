@@ -25,16 +25,17 @@ class UserListAPI(generics.ListCreateAPIView):
         return User.objects.all()
 
 
-class UserOnlyAPI(generics.ListCreateAPIView):
-    permission_classes = [permissions.IsAuthenticated, ]
-    serializer_class = UserSerializers
+class KakaoBackend:
+    def authenticate(self, request, kakao_id):
+        try:
+            user = User.objects.get(username=kakao_id)
+        except User.DoesNotExist:
+            user = User(username=kakao_id)
+            user.save()
+        return user
 
-    def get_queryset(self):
-        return User.objects.get('name', 'img_profile')
-
-
-def UsernamePresent(username):
-    if User.objects.filter(username=username).exists():
-        return UserOnlyAPI
-
-    return False
+    def get_user(self, user_id):
+        try:
+            return User.objects.get(pk=user_id)
+        except User.DoesNotExist:
+            return None

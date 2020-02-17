@@ -7,7 +7,7 @@ from config import settings
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = (
-        'name',
+        'username',
         'img_profile',
 
     )
