@@ -1,7 +1,6 @@
 from rest_framework import generics, permissions
 from users.serializers import UserSerializers, UserCreateSerializer
 from users.models import User
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, get_user_model
 from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import AuthenticationFailed
@@ -39,9 +38,12 @@ class AuthTokenAPIView(APIView):
         username = request.data['username']
         password = request.data['password']
         user = authenticate(username=username, password=password)
-
-        if user:
+        if User.objects.filter(username=self.cleaned_data['username']).exists():
             token, _ = Token.objects.get_or_create(user=user)
+
+            if user:
+
+
         else:
             raise AuthenticationFailed()
 
@@ -51,7 +53,7 @@ class AuthTokenAPIView(APIView):
         return Response(data)
 
 
-class SnippetListCreateAPIView(generics.ListCreateAPIView):
+class UserListCreateAPIView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializers
 
@@ -69,4 +71,3 @@ class SnippetListCreateAPIView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
 
         serializer.save(author=self.request.user)
-
