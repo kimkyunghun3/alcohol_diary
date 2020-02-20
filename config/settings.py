@@ -157,5 +157,5 @@ SITE_ID = 1
 AUTHENTICATION_BACKENDS = (
 
     'django.contrib.auth.backends.ModelBackend',
-    'users.views.KakaoBackend',
+    # 'users.views.KakaoBackend',
 )
