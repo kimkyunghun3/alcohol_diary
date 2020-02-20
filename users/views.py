@@ -38,12 +38,13 @@ class AuthTokenAPIView(APIView):
         username = request.data['username']
         password = request.data['password']
         user = authenticate(username=username, password=password)
+
         if User.objects.filter(username=self.cleaned_data['username']).exists():
             token, _ = Token.objects.get_or_create(user=user)
 
-            if user:
-
-
+        elif username in AuthTokenAPIView:
+            return user.username
+        
         else:
             raise AuthenticationFailed()
 
