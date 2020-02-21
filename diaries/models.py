@@ -31,7 +31,7 @@ class Diary(TimeStampedModel):
     drunken_level = models.CharField(max_length=50, choices=drunken_level, default="not_drunken")
     hangover_level = models.CharField(max_length=50, choices=hangover_level, default="great")
     action_type = models.CharField(max_length=50, choices=action_type, )
-
+    action_type_img = models.ImageField('메인 이미지', blank=True, upload_to='image_photos')
 
     def __str__(self):
         return f'Time Record - {self.creator}'

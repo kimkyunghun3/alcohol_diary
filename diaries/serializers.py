@@ -22,6 +22,7 @@ class DiarySerializers(serializers.ModelSerializer):
             'hangover_level',
             'action_type',
             'alcohol_records',
+            'action_type_img',
         )
 
 

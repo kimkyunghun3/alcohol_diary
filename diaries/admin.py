@@ -11,5 +11,6 @@ class DailyRecordAdmin(admin.ModelAdmin):
         'drunken_level',
         'hangover_level',
         'action_type',
+        'action_type_img',
 
     )

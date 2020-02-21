@@ -3,7 +3,7 @@ from users.serializers import UserSerializers, UserCreateSerializer
 from users.models import User
 from django.contrib.auth import authenticate, get_user_model
 from rest_framework.authtoken.models import Token
-from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.exceptions import AuthenticationFailed, ValidationError
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -34,19 +34,31 @@ class AuthTokenAPIView(APIView):
     def post(self, request):
         username = request.data['username']
         password = request.data['password']
-        user, _ = User.objects.get_or_create(username=username, password=password)
-        token, _ = Token.objects.get_or_create(user=user)
 
+        user = authenticate(username= username, password = password)
+
+        if user is None:
+            try:
+                user = User.objects.get(username=username)
+            except (User.DoesNotExist, User.MultipleObjectsReturned):
+                # username 이 없으면 생성
+                User.objects.create_user(username=username, password=password)
+            else:
+                # username 이 있으나 password 가 없는 경우
+                if not user.check_password(password):
+                    raise ValidationError({'detail': '패스워드가 잘못되었습니다.'})
+
+        token, _ = Token.objects.get_or_create(user=user)
         data = {
-            'token': token.key,
-        }
+                'token': token.key,
+                }
         return Response(data)
-    #
-    # if username in AuthTokenAPIView:
-    #     return user.username
-    #
-    # else:
-    #     raise AuthenticationFailed()
+
+# if username in AuthTokenAPIView:
+#     return user.username
+#
+# else:
+#     raise AuthenticationFailed()
 # class UserListCreateAPIView(generics.ListCreateAPIView):
 #     queryset = User.objects.all()
 #     serializer_class = UserSerializers
