@@ -4,5 +4,6 @@ from . import views
 app_name = 'diaries'
 
 urlpatterns = [
-    path('', views.DiariesListAPI.as_view(), name='Diary'),
+    path('<int:pk>/', views.DiariesRetrieveAPIView.as_view()),
+    path('', views.DiariesListCreateAPI.as_view(), name='Diary'),
 ]

@@ -1,3 +1,7 @@
+import json
+
+import requests
+from django.views import View
 from rest_framework import generics, permissions
 from users.serializers import UserSerializers, UserCreateSerializer
 from users.models import User
@@ -35,7 +39,7 @@ class AuthTokenAPIView(APIView):
         username = request.data['username']
         password = request.data['password']
 
-        user = authenticate(username= username, password = password)
+        user = authenticate(username=username, password=password)
 
         if user is None:
             try:
@@ -50,9 +54,36 @@ class AuthTokenAPIView(APIView):
 
         token, _ = Token.objects.get_or_create(user=user)
         data = {
-                'token': token.key,
-                }
+            'token': token.key,
+        }
         return Response(data)
+
+
+class KakaoLoginView(View):
+    def get(self, request):
+        kakao_access_code = request.Get.get('authorization_code', None)
+        kakao_app_key = '8886c592089a4ed719130630690f6b81'
+
+        url = 'https://kauth.kakao.com/oauth/token'
+        headers = {'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'}
+
+        body = {'grant_type': 'authorization_code',
+                'client_id': kakao_app_key,
+                'redirect_url': 'http://localhost:8000/kakao-login',
+                'code': kakao_access_code
+                }
+
+        token_kakao_response = requests.post(url, headers=headers, data=body)
+        access_token = json.loads(token_kakao_response.text).get('access_token')
+
+        url = 'https://kapi.kakao.com/v2/user/me'
+        headers = {
+            'Authorization': f'Bearer {access_token}',
+            'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'
+        }
+
+        kakao_response = requests.get(url, headers=headers)
+        kakao_response = json.loads(token_kakao_response.text)
 
 # if username in AuthTokenAPIView:
 #     return user.username

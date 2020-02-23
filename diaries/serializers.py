@@ -1,11 +1,13 @@
+from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework import serializers
 
 from alcohols.models import AlcoholRecord
 from alcohols.serializers import AlcoholRecordSerializers
 from diaries.models import Diary
+from users.serializers import UserSerializers
 
 
-class DiarySerializers(serializers.ModelSerializer):
+class DiarySerializers(WritableNestedModelSerializer):
     # alcohol_records = AlcoholRecordSerializers(many=True)
     # alcohol_records = PrimaryKeyRelatedField(many=True,read_only=True)
     # print(alcohol_records)
