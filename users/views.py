@@ -1,7 +1,6 @@
 import json
 
 import requests
-from django.views import View
 from rest_framework import generics, permissions
 from users.serializers import UserSerializers, UserCreateSerializer
 from users.models import User
@@ -59,9 +58,9 @@ class AuthTokenAPIView(APIView):
         return Response(data)
 
 
-class KakaoLoginView(View):
+class KakaoLoginView(APIView):
     def get(self, request):
-        kakao_access_code = request.Get.get('authorization_code', None)
+        kakao_access_code = request.GET.get('code', None)
         kakao_app_key = '8886c592089a4ed719130630690f6b81'
 
         url = 'https://kauth.kakao.com/oauth/token'
@@ -83,7 +82,21 @@ class KakaoLoginView(View):
         }
 
         kakao_response = requests.get(url, headers=headers)
-        kakao_response = json.loads(token_kakao_response.text)
+        json_kakao = json.loads(kakao_response.content)
+
+        if json_kakao.get('id'):
+            try:
+                user = User.objects.get(username=json_kakao.get("id"))
+            except(User.DoesNotExist, User.MultipleObjectsReturned):
+                user = User.objects.create_user(username=json_kakao.get("id"))
+            token, _ = Token.objects.get_or_create(user=user)
+            data = {
+                'token': token.key,
+            }
+            return Response(data)
+        else:
+            raise ValidationError("로그인은 카카오톡으로만 가능합니다.")
+
 
 # if username in AuthTokenAPIView:
 #     return user.username

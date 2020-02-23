@@ -11,5 +11,6 @@ urlpatterns = [
     # url('users/kakao/login/callback', views.social_login),
     # url('', views.UserListAPI.as_view(), name='UserIP'),
     url('user-token/', views.AuthTokenAPIView.as_view(), name='UserIP'),
+    url('oauth/',views.KakaoLoginView.as_view()),
     # url('<uuid:pk>/', views.UserOnlyAPI.as_view(), name='UserOnly'),
 ]
