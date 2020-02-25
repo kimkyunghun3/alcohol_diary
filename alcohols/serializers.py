@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from alcohols.models import AlcoholRecord
+from alcohols.models import AlcoholRecord, AlcoholType, Alcohol
 
 
 class AlcoholRecordSerializers(serializers.ModelSerializer):
@@ -16,4 +16,27 @@ class AlcoholRecordSerializers(serializers.ModelSerializer):
             'bottles',
             'glasses',
 
+        )
+
+
+class AlcoholSerializers(serializers.ModelSerializer):
+    alcohol_records = AlcoholRecordSerializers(many=True)
+
+    class Meta:
+        model = Alcohol
+        fields = (
+            'name'
+            'alcohol_records'
+        )
+
+
+class AlcoholTypeSerializers(serializers.ModelSerializer):
+    alcohols = AlcoholSerializers(many=True)
+
+    class Meta:
+        model = AlcoholType
+        fields = (
+
+            'alcohol_name'
+            'alcohols'
         )
