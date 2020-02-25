@@ -15,5 +15,5 @@ class AlcoholRecordSerializers(serializers.ModelSerializer):
         fields = (
             'bottles',
             'glasses',
-            'diary',
+
         )
