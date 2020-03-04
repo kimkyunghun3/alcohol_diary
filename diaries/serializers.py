@@ -2,21 +2,54 @@ from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework import serializers
 
 from alcohols.models import AlcoholRecord
-from alcohols.serializers import AlcoholRecordSerializers
+from alcohols.serializers import AlcoholRecordSerializers, AlcoholRecordCreateSerializers
 from diaries.models import Diary
+from images.models import Image
 from users.serializers import UserSerializers
 
 
-class DiarySerializers(WritableNestedModelSerializer):
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = (
+            'main_image',
+        )
+
+
+class DiarySerializers(serializers.ModelSerializer):
     # alcohol_records = AlcoholRecordSerializers(many=True)
     # alcohol_records = PrimaryKeyRelatedField(many=True,read_only=True)
     # print(alcohol_records)
     alcohol_records = AlcoholRecordSerializers(many=True)
+    image_set = ImageSerializer(many=True)
 
     class Meta:
         model = Diary
 
         fields = (
+            'review',
+            'date',
+            'drunken_level',
+            'hangover_level',
+            'action_type',
+            'alcohol_records',
+            'action_type_img',
+
+            'image_set',
+        )
+
+
+class DiaryCreateSerializers(WritableNestedModelSerializer):
+    creator = serializers.HiddenField(
+        default=serializers.CurrentUserDefault(),
+    )
+    alcohol_records = AlcoholRecordCreateSerializers(many=True)
+
+    class Meta:
+        model = Diary
+
+        fields = (
+            'pk',
             'creator',
             'review',
             'date',
@@ -26,6 +59,9 @@ class DiarySerializers(WritableNestedModelSerializer):
             'alcohol_records',
             'action_type_img',
         )
+
+    def to_representation(self, instance):
+        return DiarySerializers(instance).data
 
 
 # class DiaryAPIView(ObjectMultipleModelAPIView):

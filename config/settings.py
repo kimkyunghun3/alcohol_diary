@@ -21,6 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'ly8a^)gpokm-=kxxk!ti8c4e4ytdg988@#%of^bejxg(wg@4&l'
 
+SOCIAL_AUTH_KAKAO_KEY = '8886c592089a4ed719130630690f6b81'
+
 # '8886c592089a4ed719130630690f6b81'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,11 +47,9 @@ INSTALLED_APPS = [
     'drf_multiple_model',
     'rest_auth',
     'django.contrib.sites',
-    'allauth',
-    # 'allauth.account',
-    # 'rest_auth.registration',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.kakao',
+    'oauth2_provider',
+    'social_django',
+    'rest_framework_social_oauth2',
     'django_filters',
 ]
 
@@ -76,6 +76,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -141,6 +143,8 @@ REST_FRAMEWORK = {
 
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.TokenAuthentication',
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
+        'rest_framework_social_oauth2.authentication.SocialAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 30
@@ -158,7 +162,11 @@ SITE_ID = 1
 # REST_USE_JWT = True
 
 AUTHENTICATION_BACKENDS = (
-
+    'social_core.backends.kakao.KakaoOAuth2',
+    'rest_framework_social_oauth2.backends.DjangoOAuth2',
     'django.contrib.auth.backends.ModelBackend',
-    # 'users.views.KakaoBackend',
 )
+
+# OAUTH2_PROVIDER = {
+#     'OAUTH2_BACKEND_CLASS': 'oauth2_provider.oauth2_backends.JSONOAuthLibCore',
+# }

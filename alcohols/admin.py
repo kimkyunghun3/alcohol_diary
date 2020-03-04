@@ -3,15 +3,15 @@ from . import models
 
 
 @admin.register(models.Alcohol)
-class UserAdmin(admin.ModelAdmin):
+class AlcoholAdmin(admin.ModelAdmin):
     pass
 
 
 @admin.register(models.AlcoholRecord)
-class UserAdmin(admin.ModelAdmin):
+class AlcoholRecordAdmin(admin.ModelAdmin):
     pass
 
 
 @admin.register(models.AlcoholType)
-class UserAdmin(admin.ModelAdmin):
+class AlcoholTypeAdmin(admin.ModelAdmin):
     pass

@@ -1,10 +1,29 @@
+from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 from alcohols.models import AlcoholRecord, AlcoholType, Alcohol
 
 
-class AlcoholRecordSerializers(serializers.ModelSerializer):
+class AlcoholTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AlcoholType
+        fields = (
+            'alcohol_name',
+        )
+
+
+class AlcoholSerializer(serializers.ModelSerializer):
+    alcohol_type = AlcoholTypeSerializer()
+
+    class Meta:
+        model = Alcohol
+        fields = (
+            'alcohol_type',
+            'name',
+        )
+
+class AlcoholRecordCreateSerializers(serializers.ModelSerializer):
     def validate(self, attrs):
         if not attrs.get('bottles') and not attrs.get('glasses'):
             raise ValidationError("병이나 잔 중에 최소 하나는 입력해야 합나다.")
@@ -16,27 +35,19 @@ class AlcoholRecordSerializers(serializers.ModelSerializer):
             'bottles',
             'glasses',
 
+            'alcohol'
         )
 
 
-class AlcoholSerializers(serializers.ModelSerializer):
-    alcohol_records = AlcoholRecordSerializers(many=True)
+
+class AlcoholRecordSerializers(serializers.ModelSerializer):
+    alcohol = AlcoholSerializer()
 
     class Meta:
-        model = Alcohol
+        model = AlcoholRecord
         fields = (
-            'name'
-            'alcohol_records'
-        )
+            'bottles',
+            'glasses',
 
-
-class AlcoholTypeSerializers(serializers.ModelSerializer):
-    alcohols = AlcoholSerializers(many=True)
-
-    class Meta:
-        model = AlcoholType
-        fields = (
-
-            'alcohol_name'
-            'alcohols'
+            'alcohol'
         )

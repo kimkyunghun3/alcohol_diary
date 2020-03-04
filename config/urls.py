@@ -31,4 +31,5 @@ urlpatterns = [
                   # path('rest-auth/', include('rest_auth.urls')),
                   # path('rest-auth/registration', include('rest_auth.registration.urls')),
                   path('users/', include('users.urls')),
+                    path('auth/', include('rest_framework_social_oauth2.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

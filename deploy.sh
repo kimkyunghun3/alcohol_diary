@@ -33,7 +33,7 @@ scp -q -i "${IDENTITY_FILE}" -r "${ORIGIN_SOURCE}" ${TARGET}:${DEST_SOURCE}
 
 # pip install
 echo "pip install"
-${SSH_CMD} pip3 install -q -r /home/ubuntu/projects/alcohol_diary/requirements.txt
+${SSH_CMD} 'sudo pip3 install -q -r /home/ubuntu/projects/alcohol_diary/requirements.txt'
 
 echo "screen settings"
 # 실행중이던 screen 세션종료
