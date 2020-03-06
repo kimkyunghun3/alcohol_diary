@@ -35,13 +35,15 @@ class AlcoholRecordCreateSerializers(serializers.ModelSerializer):
             'bottles',
             'glasses',
 
-            'alcohol'
+            'alcohol_type',
+            'alcohol_name',
         )
 
 
 
 class AlcoholRecordSerializers(serializers.ModelSerializer):
-    alcohol = AlcoholSerializer()
+    alcohol_type = serializers.CharField(source='alcohol.name')
+    alcohol_name = serializers.CharField(source='alcohol.alcohol_type.alcohol_name')
 
     class Meta:
         model = AlcoholRecord
@@ -49,5 +51,6 @@ class AlcoholRecordSerializers(serializers.ModelSerializer):
             'bottles',
             'glasses',
 
-            'alcohol'
+            'alcohol_type',
+            'alcohol_name',
         )
