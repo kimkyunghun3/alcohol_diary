@@ -33,7 +33,7 @@ class DiarySerializers(serializers.ModelSerializer):
             'hangover_level',
             'action_type',
             'alcohol_records',
-            'action_type_img',
+            # 'action_type_img',
 
             'image_set',
         )
@@ -57,7 +57,7 @@ class DiaryCreateSerializers(WritableNestedModelSerializer):
             'hangover_level',
             'action_type',
             'alcohol_records',
-            'action_type_img',
+            # 'action_type_img',
         )
 
     def to_representation(self, instance):
